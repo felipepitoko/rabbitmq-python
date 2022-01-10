@@ -1,17 +1,19 @@
 #Felipe Costa escreveu isto
 #v1.0 23-11-2021
 #Script para consultas, updates e inserts em um banco postgres
-from os import error
+from os import error, getenv
+from dotenv import load_dotenv
 import psycopg2
 
 class ConsultaBanco:
+    load_dotenv()
     def __init__(self) -> None:
         pass
 
     def selectSql():
         try:
-            connPague = psycopg2.connect("host=ip_ou_endereco_banco dbname=nome_banco user=usuario_email password=***")
-            cursor = connPague.cursor()    
+            connection = psycopg2.connect(getenv('BD_CONNECTION_STRING'))
+            cursor = connection.cursor()    
             sqlConsulta ="select * from tabela_exemplo"
             print(sqlConsulta)
             cursor.execute(sqlConsulta)
@@ -24,12 +26,12 @@ class ConsultaBanco:
 
     def updateSql():
         try:
-            connPague = psycopg2.connect("host=ip_ou_endereco_banco dbname=nome_banco user=usuario_email password=***")
-            cursor = connPague.cursor()    
+            connection = psycopg2.connect(getenv('BD_CONNECTION_STRING'))
+            cursor = connection.cursor()    
             sqlInsercao ="update tabela_exemplo set coluna1 = 'novo_valor' where coluna1='valor_antigo'"
             print(sqlInsercao)
             cursor.execute(sqlInsercao)
-            connPague.commit()
+            connection.commit()
         except error:
             print (error)
             print('Erro ao tentar carregar no banco de dados:::')
@@ -37,12 +39,12 @@ class ConsultaBanco:
 
     def insertSql():
         try:
-            connPague = psycopg2.connect("host=ip_ou_endereco_banco dbname=nome_banco user=usuario_email password=***")
-            cursor = connPague.cursor()    
+            connection = psycopg2.connect(getenv('BD_CONNECTION_STRING'))
+            cursor = connection.cursor()    
             sqlInsercao ="insert into tabela_exemplo (coluna1,coluna2) values ('novo_dado','novo_dado')"
             print(sqlInsercao)
             cursor.execute(sqlInsercao)
-            connPague.commit()
+            connection.commit()
         except error:
             print (error)
             print('Erro ao tentar carregar no banco de dados:::')

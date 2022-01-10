@@ -1,5 +1,5 @@
 from adaptadorRabbit import TratamentoFila
-print('Servico consumidor de carga_csv:::::')
+print('Servico para comunicar e trabalhar com filas RabbitMQ:::::')
 print('Produzido por: Felipe Costa')
 print('v.1.0')
 print(':::::::::::::::::::::::::::::::::::::::::::::::::::::')

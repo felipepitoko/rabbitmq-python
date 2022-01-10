@@ -14,8 +14,8 @@ class envioAoBanco:
     def upload_dataframe_postgres(df_teste):
         print('Iniciando carga de dataframe ao banco postgres::::')
         try:
-            connPague = psycopg2.connect(getenv('BD_CONNECTION_STRING'))
-            cursor = connPague.cursor()    
+            connection = psycopg2.connect(getenv('BD_CONNECTION_STRING'))
+            cursor = connection.cursor()    
             print('Fiz uma conexao com o banco de dados') 
             df_teste = df_teste.replace(np.nan, '', regex = True)
             dfColumns = list(df_teste.columns)
@@ -31,7 +31,7 @@ class envioAoBanco:
                 sqlInsercao ="""INSERT INTO tabela_exemplo ("""+cols+""") values ("""+dados_linha+""")"""
                 print(sqlInsercao)
                 cursor.execute(sqlInsercao)
-                connPague.commit()
+                connection.commit()
             return True
         except error:
             print(error)

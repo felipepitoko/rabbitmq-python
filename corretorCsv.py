@@ -37,7 +37,7 @@ class corretorCsv():
             #Por padrão, o pandas coloca 'nan' em tudo que for nulo da tabela. Essa linha corrige isso
             df1 = df.replace(np.nan, '', regex=True)
             print(df1)
-            df1.to_csv('./downloads/tabela_limpa.csv', sep=';',index=False)
+            df1.to_csv('tabela_limpa.csv', sep=';',index=False)
             return df1         
         except error:
             print(error)
